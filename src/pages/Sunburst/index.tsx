@@ -1,9 +1,9 @@
 import { useQuery } from "react-query";
-import { ResponsiveBar } from "@nivo/bar";
+import { ResponsiveSunburst } from '@nivo/sunburst'
 
-import { getUsers } from "./api/getUser";
-
-import * as S from "./App.styled";
+// import { getUsers } from "../../api/getUser";
+import getUsers from "../.././api/Fakeapi.json";
+import * as S from "./styled";
 
 function App() {
   const { data, refetch } = useQuery(["getUsers"], () => getUsers(), {
@@ -15,7 +15,7 @@ function App() {
   const chartData = () => {
     if (!data) return [];
 
-    return data.results.map(({ name, dob }) => {
+    return data.results.map(({ name}) => {
       return {
         name: name.first,
         age: dob.age,
@@ -25,8 +25,9 @@ function App() {
 
   return (
     <S.Container>
-      <S.Button onClick={refresh}>새로고침</S.Button>
-      <ResponsiveBar
+      <button onClick={refresh}>새로고침</button>
+      <ResponsiveSunburst
+        data={chartData}
         data={chartData()}
         keys={["age"]}
         indexBy="name"

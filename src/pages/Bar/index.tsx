@@ -1,9 +1,9 @@
 import { useQuery } from "react-query";
 import { ResponsiveBar } from "@nivo/bar";
 
-import { getUsers } from "./api/getUser";
+import { getUsers } from "../../api/getUser";
 
-import * as S from "./App.styled";
+import * as S from "./styled";
 
 function App() {
   const { data, refetch } = useQuery(["getUsers"], () => getUsers(), {
